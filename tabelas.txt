@@ -1,0 +1,78 @@
+- Usuário -
+Nome - VARCHAR 46 - obrigatório;
+E-mail - VARCHAR 52 - obrigatório;
+Senha - CHAR 256 - obrigatório;
+Telefone - CHAR 11 - obrigatório;
+Anunciante/consumidor - 1:1;
+Preferências (configurações) - 1:1;
+Data de criação - timestamp - automático;
+
+- Empresa anunciante -
+Locais de venda - N:1;
+CNPJ - CHAR 14 - obrigatório;
+Razão social - VARCHAR 32 - obrigatório;
+Sede principal - VARCHAR 40 - obrigatório;
+
+- Consumidor / Vendedor - 
+CPF - CHAR 11 - obrigatório;
+Preferências de compra - enum;
+Compras (histórico) - N:1;
+Chat - N:1;
+
+- Preferências de produtos -
+Nome - VARCHAR 20;
+
+- Pagamento -
+Número cartão - CHAR 256 - Obrigatório;
+CVV - CHAR 256 - Obrigatório;
+Nome Titular - CHAR 256 - Obrigatório;
+Data de vencimento - CHAR 256 - Obrigatório;
+Descrição - VARCHAR 42;
+
+- Compra -
+Produto - 1:1;
+Anunciante - 1:N;
+Consumidor - 1:N;
+Data - TIMESTAMP - Automático;
+PIX/Boleto - Booleano - obrigatório;
+Detalhes do pagamento - 1:1;
+
+- Local -
+Estado - VARCHAR 23;
+Cidade - VARCHAR 23;
+Bairro - VARCHAR 30;
+
+- Produto -
+Nome - VARCHAR 32 - Obrigatório;
+Valor - FLOAT - Obrigatório;
+Arquivo - N:1;
+Descrição - TEXT - obrigatório;
+Anunciante/empresa - 1:N;
+Tipo - enum (decidir se dentro do Java ou SQL);
+Detalhes técnicos - TEXT - opcional;
+Data de publicação - TIMESTAMP - automático;
+Data de edição - TIMESTAMP - automático;
+
+- Chat -
+Anunciante - 1:N;
+Consumidor - 1:N;
+Produto - 1:1;
+Mensagem - N:1;
+
+- Mensagem -
+Chat - 1:N;
+Mensagem - VARCHAR 180 - obrigatório;
+Horário - TIMESTAMP - automático;
+Arquivo - N:1;
+
+- Suporte -
+Vendedor/consumidor- 1:N;
+Auxiliador - N:N;
+Mensagem - TEXT - obrigatório;
+Tipo de problema - enum (Java ou SQL) - obrigatório;
+e-mail - VARCHAR 100 - obrigatório e tlvz automático;
+
+- Arquivo (Imagem, vídeo, etc...) -
+Nome do arquivo - VARCHAR 255 - obrigatório;
+URL - TEXT - Obrigatório;
+tipo - VARCHAR(50) -  Obrigatório;
