@@ -1,6 +1,9 @@
 package com.gamerdream.backend.Models.Usuarios;
 
 import java.util.Date;
+import java.util.List;
+
+import com.gamerdream.backend.Models.Usuarios.InfosAdicionais.Preferencias;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -43,11 +48,19 @@ public class Usuario {
     @JoinColumn(name = "id_consumidor", referencedColumnName = "idConsumidor")
     private Consumidor consumidor;
 
+    @ManyToMany
+    @JoinTable(
+        name = "preferencias_usuario",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "preferencia_id")
+    )
+    private List<Preferencias> preferenciasUsuario;
+
     // Tabela de preferências (Configurações) |
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_criacao", nullable=false)
-    private Date dataCriacao;
+    private Date dataCriacao = new Date();
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_edicao", nullable=false)
@@ -95,10 +108,6 @@ public class Usuario {
 
     public Date getDataCriacao() {
         return dataCriacao;
-    }
-
-    public void setDataCriacao(Date dataCriacao) {
-        this.dataCriacao = dataCriacao;
     }
 
     public Date getDataEdicao() {
