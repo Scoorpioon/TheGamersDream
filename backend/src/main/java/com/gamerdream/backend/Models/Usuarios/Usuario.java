@@ -38,7 +38,8 @@ public class Usuario {
     @Column(name = "num_celular", columnDefinition = "CHAR(11)", nullable=false)
     private String telefone;
 
-    // Relacionamento com tabela de anunciante ou consumidor |
+    @Column(name = "usuario_empresa", nullable = false)
+    private Boolean usuarioEmpresa;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_empresa", referencedColumnName = "idEmpresa")
@@ -65,6 +66,26 @@ public class Usuario {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_edicao", nullable=false)
     private Date dataEdicao; // TODA VEZ QUE UM USUÁRIO MUDAR QUALQUER DADO DA CONTA, POR MENOR QUE SEJA, A DATA SERÁ SALVA!
+
+    public Usuario(String nome, String email, String senha, String telefone, Boolean usuarioEmpresa, Empresa empresa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.empresa = empresa;
+        this.preferenciasUsuario = preferenciasUsuario;
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Usuario(String nome, String email, String senha, String telefone, Boolean usuarioEmpresa, Consumidor consumidor, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.consumidor = consumidor;
+        this.preferenciasUsuario = preferenciasUsuario;
+        this.dataCriacao = dataCriacao;
+    }
 
     public Long getId() {
         return idUsuario;

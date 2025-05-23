@@ -3,6 +3,7 @@ Nome - VARCHAR 46 - obrigatório;
 E-mail - VARCHAR 52 - obrigatório;
 Senha - CHAR 256 - obrigatório;
 Telefone - CHAR 11 - obrigatório;
+Empresa - booleano - obrigatório;
 Anunciante/consumidor - 1:1;
 Preferências (configurações) - 1:1;
 Data de criação - timestamp - automático;
@@ -13,14 +14,21 @@ CNPJ - CHAR 14 - obrigatório;
 Razão social - VARCHAR 32 - obrigatório;
 Sede principal - VARCHAR 40 - obrigatório;
 
-- Consumidor / Vendedor - 
+- Consumidor - 
 CPF - CHAR 11 - obrigatório;
 Preferências de compra - enum;
 Compras (histórico) - N:1;
 Chat - N:1;
 
-- Preferências de produtos -
-Nome - VARCHAR 20;
+- Configurações -
+Receber e-mails - booleano;
+
+- Preferências de compra -
+Nome do produto - VARCHAR 20;
+
+{Computador, Vídeo-game, Notebook, Peças de computador, Placa de vídeo, Memória ram, placa mãe, fonte, HDD, SSD, SSD NVME, Processador, FAN, Gabinete, Leitor de DVD, HD externo, SSD externo, pendrive, Placas arduíno}
+
+(Preenchimento manual do dev)
 
 - Pagamento -
 Número cartão - CHAR 256 - Obrigatório;
@@ -38,7 +46,7 @@ PIX/Boleto - Booleano - obrigatório;
 Detalhes do pagamento - 1:1;
 
 - Local -
-Estado - VARCHAR 23;
+Estado - VARCHAR 15;
 Cidade - VARCHAR 23;
 Bairro - VARCHAR 30;
 
