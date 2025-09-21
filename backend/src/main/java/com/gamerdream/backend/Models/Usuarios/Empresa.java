@@ -1,5 +1,7 @@
 package com.gamerdream.backend.Models.Usuarios;
 
+import com.gamerdream.backend.Models.Endereco;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,10 +23,65 @@ public class Empresa {
     @Column(name = "razao_social", length = 32, nullable = false)
     private String razaoSocial;
 
-    @Column(name = "sede_principal", length = 40, nullable = false)
-    private String sedePrincipal;
+    @Column(name = "inscricao_estadual", length = 12, nullable = true)
+    private String inscricaoEstadual;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario", referencedColumnName = "idUsuario")
-    private Usuario usuario;
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "idPessoa")
+    private Pessoa pessoaResponsavel;
+
+    @Column(name = "plano", nullable = false)
+    private int plano;
+
+    @OneToOne
+    @JoinColumn(name = "endereco", referencedColumnName = "idEndereco")
+    private Endereco endereco;
+
+    public Long getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Long idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getInscricaoEstadual() {
+        return inscricaoEstadual;
+    }
+
+    public void setInscricaoEstadual(String inscricaoEstadual) {
+        this.inscricaoEstadual = inscricaoEstadual;
+    }
+
+    public Pessoa getPessoaResponsavel() {
+        return pessoaResponsavel;
+    }
+
+    public void setPessoaResponsavel(Pessoa pessoaResponsavel) {
+        this.pessoaResponsavel = pessoaResponsavel;
+    }
+
+    public int getPlano() {
+        return plano;
+    }
+
+    public void setPlano(int plano) {
+        this.plano = plano;
+    }
 }

@@ -38,16 +38,13 @@ public class Usuario {
     @Column(name = "num_celular", columnDefinition = "CHAR(11)", nullable=false)
     private String telefone;
 
-    @Column(name = "usuario_empresa", nullable = false)
-    private Boolean usuarioEmpresa;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_empresa", referencedColumnName = "idEmpresa")
     private Empresa empresa;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_consumidor", referencedColumnName = "idConsumidor")
-    private Consumidor consumidor;
+    @JoinColumn(name = "id_pessoa", referencedColumnName = "idPessoa")
+    private Pessoa pessoa;
 
     @ManyToMany
     @JoinTable(
@@ -77,12 +74,12 @@ public class Usuario {
         this.dataCriacao = dataCriacao;
     }
 
-    public Usuario(String nome, String email, String senha, String telefone, Boolean usuarioEmpresa, Consumidor consumidor, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+    public Usuario(String nome, String email, String senha, String telefone, Boolean usuarioEmpresa, Pessoa pessoa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        this.consumidor = consumidor;
+        this.pessoa = pessoa;
         this.preferenciasUsuario = preferenciasUsuario;
         this.dataCriacao = dataCriacao;
     }
