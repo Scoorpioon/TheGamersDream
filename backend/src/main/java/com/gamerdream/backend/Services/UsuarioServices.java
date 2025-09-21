@@ -11,6 +11,8 @@ import com.gamerdream.backend.Repositories.ConsumidorRepository;
 import com.gamerdream.backend.Repositories.EmpresaRepository;
 import com.gamerdream.backend.Repositories.UsuarioRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UsuarioServices implements UserDetailsService {
     
@@ -28,7 +30,12 @@ public class UsuarioServices implements UserDetailsService {
         return repositorioUsuario.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Não foi possível encontrar o usuário. Tenta novamente!"));
     }
 
-    /* private Usuario criarUsuario(String nome, String email, String senha, String telefone, Boolean usuarioEmpresa) {
-        Optional<Usuario> novoUsuario = new Usuario(nome, email, senha, telefone);
-    } */
+    @Transactional
+    public Usuario criarUsuario(Usuario dadosRecebidosUsuario) {
+        dadosRecebidosUsuario.setId(null);
+
+        this.repositorioUsuario.save(dadosRecebidosUsuario);
+
+        return dadosRecebidosUsuario;
+    }
 }

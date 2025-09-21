@@ -16,6 +16,9 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPessoa;
 
+    @Column(name = "nome", nullable = false)
+    private String nome;
+
     @Column(name = "cpf", columnDefinition = "CHAR(11)", nullable = false)
     private String cpf;
 
