@@ -1,13 +1,20 @@
 package com.gamerdream.backend.Models.Usuarios;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.gamerdream.backend.Models.Usuarios.InfosAdicionais.Preferencias;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,19 +28,19 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
-    @Column(name = "nome", length = 46, nullable=false)
-    private String nome;
+    @Column(name = "nome_usuario", length = 46, nullable=false)
+    private String username;
 
     @Column(name = "email", length=60, nullable=false)
     private String email;
 
     @Column(name = "senha", length=256, nullable=false)
-    private String senha;
+    private String password;
 
     @Column(name = "num_celular", columnDefinition = "CHAR(11)", nullable=false)
     private String telefone;
@@ -64,20 +71,29 @@ public class Usuario {
     @Column(name = "data_edicao", nullable=false)
     private Date dataEdicao; // TODA VEZ QUE UM USUÁRIO MUDAR QUALQUER DADO DA CONTA, POR MENOR QUE SEJA, A DATA SERÁ SALVA!
 
-    public Usuario(String nome, String email, String senha, String telefone, Boolean usuarioEmpresa, Empresa empresa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
-        this.nome = nome;
+    /* Spring Security */
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    public Usuario(String username, String email, String password, String telefone, Boolean usuarioEmpresa, Empresa empresa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+        this.username = username;
         this.email = email;
-        this.senha = senha;
+        this.password = password;
         this.telefone = telefone;
         this.empresa = empresa;
         this.preferenciasUsuario = preferenciasUsuario;
         this.dataCriacao = dataCriacao;
     }
 
-    public Usuario(String nome, String email, String senha, String telefone, Boolean usuarioEmpresa, Pessoa pessoa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
-        this.nome = nome;
+    public Usuario(String username, String email, String password, String telefone, Boolean usuarioEmpresa, Pessoa pessoa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+        this.username = username;
         this.email = email;
-        this.senha = senha;
+        this.password = password;
         this.telefone = telefone;
         this.pessoa = pessoa;
         this.preferenciasUsuario = preferenciasUsuario;
@@ -93,11 +109,11 @@ public class Usuario {
     }
 
     public String getNome() {
-        return nome;
+        return username;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -109,11 +125,11 @@ public class Usuario {
     }
 
     public String getSenha() {
-        return senha;
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(String password) {
+        this.password = password;
     }
 
     public String getTelefone() {
@@ -134,5 +150,15 @@ public class Usuario {
 
     public void setDataEdicao(Date dataEdicao) {
         this.dataEdicao = dataEdicao;
+    }
+
+    @Override
+    public String getPassword() {
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
+
+    @Override
+    public String getUsername() {
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
     }
 }
