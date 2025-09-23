@@ -35,6 +35,8 @@ public class UsuarioServices implements UserDetailsService {
     public Usuario criarUsuario(Usuario dadosRecebidosUsuario) {
         dadosRecebidosUsuario.setId(null);
 
+        System.out.println(dadosRecebidosUsuario.getNome());
+
         this.repositorioUsuario.save(dadosRecebidosUsuario);
 
         return dadosRecebidosUsuario;

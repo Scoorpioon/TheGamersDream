@@ -82,7 +82,7 @@ public class Usuario implements UserDetails {
 
     /* =============================================================== */
 
-    public Usuario(String username, String email, String password, String telefone, Boolean usuarioEmpresa, Empresa empresa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+    public Usuario(String username, String email, String password, String telefone, Empresa empresa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -92,7 +92,7 @@ public class Usuario implements UserDetails {
         this.dataCriacao = dataCriacao;
     }
 
-    public Usuario(String username, String email, String password, String telefone, Boolean usuarioEmpresa, Pessoa pessoa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+    public Usuario(String username, String email, String password, String telefone, Pessoa pessoa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -100,6 +100,13 @@ public class Usuario implements UserDetails {
         this.pessoa = pessoa;
         this.preferenciasUsuario = preferenciasUsuario;
         this.dataCriacao = dataCriacao;
+    }
+
+    public Usuario(String username, String email, String password, String telefone) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.telefone = telefone;
     }
 
     public Long getId() {
