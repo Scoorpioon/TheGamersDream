@@ -1,5 +1,7 @@
 package com.gamerdream.backend.Services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,9 +35,10 @@ public class UsuarioServices implements UserDetailsService {
 
     @Transactional
     public Usuario criarUsuario(Usuario dadosRecebidosUsuario) {
-        dadosRecebidosUsuario.setId(null);
+        Date momentoAtual = new Date();
 
-        System.out.println(dadosRecebidosUsuario.getNome());
+        dadosRecebidosUsuario.setId(null);
+        dadosRecebidosUsuario.setDataCriacao(momentoAtual);
 
         this.repositorioUsuario.save(dadosRecebidosUsuario);
 

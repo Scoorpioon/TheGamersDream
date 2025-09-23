@@ -39,6 +39,8 @@ public class UsuarioController {
             return ResponseEntity.created(uriDeDirecao).build();
         } catch(DataIntegrityViolationException violacao) {
             System.out.println("Estranho... alguma informacao ja ta cadastrada, ou viola algo do Spring. Tentativa de invasao?");
+            System.out.println(violacao.getMessage());
+
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Houve uma violação de integridade de dados");
 
         }

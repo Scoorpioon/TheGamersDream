@@ -25,9 +25,17 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "usuario")
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,7 +76,7 @@ public class Usuario implements UserDetails {
     private Date dataCriacao = new Date();
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_edicao", nullable=false)
+    @Column(name = "data_edicao")
     private Date dataEdicao; // TODA VEZ QUE UM USUÁRIO MUDAR QUALQUER DADO DA CONTA, POR MENOR QUE SEJA, A DATA SERÁ SALVA!
 
     /* Spring Security */
@@ -149,8 +157,13 @@ public class Usuario implements UserDetails {
         this.telefone = telefone;
     }
 
+    
     public Date getDataCriacao() {
         return dataCriacao;
+    }
+    
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public Date getDataEdicao() {
