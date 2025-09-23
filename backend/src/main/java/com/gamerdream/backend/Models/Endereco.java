@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEndereco;
+    private String idEndereco;
 
     @Column(name = "rua", length = 16, nullable = false)
     private String rua;
@@ -30,11 +30,22 @@ public class Endereco {
     @Column(name = "cep", length = 8, nullable = false)
     private String cep;
 
-    public Long getIdEndereco() {
+    public Endereco(String idEndereco, String rua, String numero, String bairro, String cidade, String estado,
+            String cep) {
+        this.idEndereco = idEndereco;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.cep = cep;
+    }
+
+    public String getIdEndereco() {
         return idEndereco;
     }
 
-    public void setIdEndereco(Long idEndereco) {
+    public void setIdEndereco(String idEndereco) {
         this.idEndereco = idEndereco;
     }
 

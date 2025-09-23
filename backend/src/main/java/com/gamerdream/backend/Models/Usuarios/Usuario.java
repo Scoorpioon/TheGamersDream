@@ -80,6 +80,8 @@ public class Usuario implements UserDetails {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+    /* =============================================================== */
+
     public Usuario(String username, String email, String password, String telefone, Boolean usuarioEmpresa, Empresa empresa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
         this.username = username;
         this.email = email;

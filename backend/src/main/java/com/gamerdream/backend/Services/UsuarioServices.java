@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.gamerdream.backend.Models.Endereco;
 import com.gamerdream.backend.Models.Usuarios.Usuario;
 import com.gamerdream.backend.Repositories.ConsumidorRepository;
 import com.gamerdream.backend.Repositories.EmpresaRepository;
