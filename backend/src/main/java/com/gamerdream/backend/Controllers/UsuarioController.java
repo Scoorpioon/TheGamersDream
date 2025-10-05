@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gamerdream.backend.DTOs.ReqCadastroDTO;
 import com.gamerdream.backend.Models.Usuarios.Usuario;
 import com.gamerdream.backend.Services.UsuarioServices;
 
@@ -27,14 +28,14 @@ public class UsuarioController {
 
     @PostMapping("/cadastro")
     @Validated
-    private ResponseEntity<?> cadastrarUsuario(@RequestBody Usuario dadosRecebidosDoUsuario) {
+    private ResponseEntity<?> cadastrarUsuario(@RequestBody ReqCadastroDTO dadosDoCadastro) {
         try {
-            this.servicoUsuario.criarUsuario(dadosRecebidosDoUsuario);
+            Usuario usuarioCadastrado = this.servicoUsuario.criarUsuario(dadosDoCadastro);
 
             URI uriDeDirecao = ServletUriComponentsBuilder
             .fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(dadosRecebidosDoUsuario.getId())
+            .buildAndExpand(usuarioCadastrado.getId())
             .toUri();
 
             return ResponseEntity.created(uriDeDirecao).build();

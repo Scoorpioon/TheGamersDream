@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gamerdream.backend.DTOs.ReqCadastroDTO;
 import com.gamerdream.backend.DTOs.ReqLoginDTO;
 import com.gamerdream.backend.Models.Endereco;
 import com.gamerdream.backend.Models.Usuarios.Usuario;
@@ -42,15 +43,20 @@ public class UsuarioServices {
     }
 
     @Transactional
-    public Usuario criarUsuario(Usuario dadosRecebidosUsuario) {
+    public Usuario criarUsuario(ReqCadastroDTO requisicaoDoCadastro) {
         Date momentoAtual = new Date();
 
-        dadosRecebidosUsuario.setId(null);
-        dadosRecebidosUsuario.setSenha(passwordEncoder.encode(dadosRecebidosUsuario.getSenha()));
-        dadosRecebidosUsuario.setDataCriacao(momentoAtual);
+        Usuario novoUsuario = new Usuario();
 
-        this.repositorioUsuario.save(dadosRecebidosUsuario);
+        novoUsuario.setId(null);
+        novoUsuario.setNome(requisicaoDoCadastro.informacoesDeLogin().username());
+        novoUsuario.setSenha(passwordEncoder.encode(requisicaoDoCadastro.informacoesDeLogin().password()));
+        novoUsuario.setEmail(requisicaoDoCadastro.informacoesDeLogin().email());
+        novoUsuario.setTelefone(requisicaoDoCadastro.informacoesDeLogin().celular());
+        novoUsuario.setDataCriacao(momentoAtual);
 
-        return dadosRecebidosUsuario;
+        this.repositorioUsuario.save(novoUsuario);
+
+        return novoUsuario;
     }
 }
