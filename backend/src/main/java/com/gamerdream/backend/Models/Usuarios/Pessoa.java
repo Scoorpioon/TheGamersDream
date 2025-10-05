@@ -35,14 +35,20 @@ public class Pessoa {
     @JoinColumn(name = "endereco", referencedColumnName = "idEndereco")
     private Endereco endereco;
 
-    // @Column(name = "tags_preferencias_compra")
-    
-    public Long getId() {
+    public Long getIdPessoa() {
         return idPessoa;
     }
 
-    public void setId(Long id) {
-        this.idPessoa = id;
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -52,4 +58,39 @@ public class Pessoa {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getNumCelular() {
+        return numCelular;
+    }
+
+    public void setNumCelular(String numCelular) {
+        this.numCelular = numCelular;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    // @Column(name = "tags_preferencias_compra")
+    
 }

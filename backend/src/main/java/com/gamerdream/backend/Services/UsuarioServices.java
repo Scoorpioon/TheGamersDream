@@ -4,18 +4,13 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gamerdream.backend.DTOs.ReqCadastroDTO;
-import com.gamerdream.backend.DTOs.ReqLoginDTO;
-import com.gamerdream.backend.Models.Endereco;
+import com.gamerdream.backend.Models.Usuarios.Empresa;
+import com.gamerdream.backend.Models.Usuarios.Pessoa;
 import com.gamerdream.backend.Models.Usuarios.Usuario;
-import com.gamerdream.backend.Repositories.ConsumidorRepository;
-import com.gamerdream.backend.Repositories.EmpresaRepository;
 import com.gamerdream.backend.Repositories.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -28,11 +23,11 @@ public class UsuarioServices {
     @Autowired
     private UsuarioRepository repositorioUsuario;
 
-    @Autowired 
-    private EmpresaRepository repositorioEmpresa;
+    @Autowired
+    private PessoaServices servicosPessoa;
 
     @Autowired
-    private ConsumidorRepository repositorioConsumidor;
+    private EmpresaServices servicosEmpresa;
 
     UsuarioServices(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -44,9 +39,9 @@ public class UsuarioServices {
 
     @Transactional
     public Usuario criarUsuario(ReqCadastroDTO requisicaoDoCadastro) {
-        Date momentoAtual = new Date();
-
         Usuario novoUsuario = new Usuario();
+        
+        Date momentoAtual = new Date();
 
         novoUsuario.setId(null);
         novoUsuario.setNome(requisicaoDoCadastro.informacoesDeLogin().username());
@@ -54,6 +49,16 @@ public class UsuarioServices {
         novoUsuario.setEmail(requisicaoDoCadastro.informacoesDeLogin().email());
         novoUsuario.setTelefone(requisicaoDoCadastro.informacoesDeLogin().celular());
         novoUsuario.setDataCriacao(momentoAtual);
+
+        if(requisicaoDoCadastro.tipoUsuario().equals("PF")) {
+            Pessoa dadosDaPessoa = this.servicosPessoa.definirDadosPF(requisicaoDoCadastro.informacoesPF());
+            novoUsuario.setPessoa(dadosDaPessoa);
+
+        } else if(requisicaoDoCadastro.tipoUsuario().equals("PJ")) {
+            Empresa dadosEmpresa = this.servicosEmpresa.definirDadosPJ(requisicaoDoCadastro.informacoesPJ(), requisicaoDoCadastro.informacoesPF());
+            
+            novoUsuario.setEmpresa(dadosEmpresa);
+        }
 
         this.repositorioUsuario.save(novoUsuario);
 

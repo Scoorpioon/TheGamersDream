@@ -69,12 +69,27 @@ public class Usuario implements UserDetails {
     private Date dataEdicao; // TODA VEZ QUE UM USUÁRIO MUDAR QUALQUER DADO DA CONTA, POR MENOR QUE SEJA, A DATA SERÁ SALVA!
 
     /* Spring Security */
+    
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
+
+    @Override
+    public String getUsername() {
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
+
+    public boolean loginCorreto(ReqLoginDTO requestLogin, PasswordEncoder passEncoder) {
+        return passEncoder.matches(requestLogin.password(), this.password);
     }
 
     /* =============================================================== */
@@ -143,7 +158,6 @@ public class Usuario implements UserDetails {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
     
     public Date getDataCriacao() {
         return dataCriacao;
@@ -160,18 +174,24 @@ public class Usuario implements UserDetails {
     public void setDataEdicao(Date dataEdicao) {
         this.dataEdicao = dataEdicao;
     }
-    
-    @Override
-    public String getPassword() {
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+
+       public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    @Override
-    public String getUsername() {
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public boolean loginCorreto(ReqLoginDTO requestLogin, PasswordEncoder passEncoder) {
-        return passEncoder.matches(requestLogin.password(), this.password);
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }

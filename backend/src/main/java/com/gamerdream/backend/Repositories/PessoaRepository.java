@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.gamerdream.backend.Models.Usuarios.Pessoa;
 
 @Repository
-public interface ConsumidorRepository extends JpaRepository<Pessoa, Long> {
+public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     
 }
