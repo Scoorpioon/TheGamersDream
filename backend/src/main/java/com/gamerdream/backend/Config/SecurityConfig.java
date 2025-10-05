@@ -44,7 +44,7 @@ public class SecurityConfig {
         http
         .authorizeHttpRequests(autenticacao -> 
         autenticacao
-        .requestMatchers("/usuario/cadastro", "/autenticacao/login").permitAll()
+        .requestMatchers("/usuario/cadastro", "/autenticacao/login", "autenticacao/logout").permitAll()
         .anyRequest().authenticated()
         )
         .csrf(csrf -> csrf.disable()) // só enquanto eu to desenvolvendo
@@ -66,38 +66,6 @@ public class SecurityConfig {
     public JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(chavePublica).build();
     }
-    
-    /* @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll() // libera tudo
-            )
-            .csrf(csrf -> csrf.disable()); // desabilita CSRF (evita erros em POST no dev)
-
-        return http.build();
-    } */
-
-    // Configuração padrão de permissões de acesso na API. Desabilitado temporariamente até o desenvolvimento do JWT
-    /* @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-        .authorizeHttpRequests(auth -> auth
-
-        .requestMatchers("/h2-console/**").permitAll()
-        .requestMatchers("/autenticacao/**").permitAll()
-        .requestMatchers("/usuario/cadastro").permitAll()
-        .requestMatchers("/usuario/**").authenticated()
-
-        .anyRequest().authenticated()
-        )
-        .formLogin(form -> form.permitAll())
-        .httpBasic(null)
-        .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
-        .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
-
-        return http.build();
-    } */
 
     @Bean
     public UserDetailsService userDetailsService() {

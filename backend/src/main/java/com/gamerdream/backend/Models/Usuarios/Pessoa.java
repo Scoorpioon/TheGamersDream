@@ -31,9 +31,9 @@ public class Pessoa {
     @Column(name = "num_celular", columnDefinition = "CHAR(11)", nullable = true)
     private String numCelular;
 
-    /* @OneToOne
+    @OneToOne
     @JoinColumn(name = "endereco", referencedColumnName = "idEndereco")
-    private Endereco endereco; */
+    private Endereco endereco;
 
     public Long getIdPessoa() {
         return idPessoa;

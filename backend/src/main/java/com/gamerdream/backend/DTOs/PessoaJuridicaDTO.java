@@ -4,7 +4,8 @@ public record PessoaJuridicaDTO(
     String cnpj,
     String razaoSocial,
     String inscricao,
+    int plano,
     PessoaFisicaDTO pessoaResponsavel,
-    int plano
+    EnderecoDTO endereco
 
 ) {}

@@ -1,12 +1,9 @@
-package com.gamerdream.backend.Config;
+package com.gamerdream.backend.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.gamerdream.backend.Exceptions.CredenciaisInvalidasEx;
-import com.gamerdream.backend.Exceptions.UsuarioNaoEncontradoEx;
 
 import java.util.Map;
 

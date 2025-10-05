@@ -5,12 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idEndereco;
+    private Long idEndereco;
 
     @Column(name = "rua", length = 16, nullable = false)
     private String rua;
@@ -30,7 +32,7 @@ public class Endereco {
     @Column(name = "cep", length = 8, nullable = false)
     private String cep;
 
-    public Endereco(String idEndereco, String rua, String numero, String bairro, String cidade, String estado,
+    public Endereco(Long idEndereco, String rua, String numero, String bairro, String cidade, String estado,
             String cep) {
         this.idEndereco = idEndereco;
         this.rua = rua;
@@ -41,11 +43,11 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public String getIdEndereco() {
+    public Long getIdEndereco() {
         return idEndereco;
     }
 
-    public void setIdEndereco(String idEndereco) {
+    public void setIdEndereco(Long idEndereco) {
         this.idEndereco = idEndereco;
     }
 

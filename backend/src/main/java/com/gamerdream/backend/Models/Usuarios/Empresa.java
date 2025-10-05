@@ -33,9 +33,9 @@ public class Empresa {
     @Column(name = "plano", nullable = false)
     private int plano;
 
-/*     @OneToOne
+    @OneToOne
     @JoinColumn(name = "endereco", referencedColumnName = "idEndereco")
-    private Endereco endereco; */
+    private Endereco endereco;
 
     public Long getIdEmpresa() {
         return idEmpresa;
@@ -83,5 +83,13 @@ public class Empresa {
 
     public void setPlano(int plano) {
         this.plano = plano;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
