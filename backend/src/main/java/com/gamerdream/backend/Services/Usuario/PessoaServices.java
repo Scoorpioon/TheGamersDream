@@ -1,4 +1,4 @@
-package com.gamerdream.backend.Services;
+package com.gamerdream.backend.Services.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import com.gamerdream.backend.DTOs.PessoaFisicaDTO;
 import com.gamerdream.backend.Models.Endereco;
 import com.gamerdream.backend.Models.Usuarios.Pessoa;
-import com.gamerdream.backend.Repositories.EnderecoRepository;
-import com.gamerdream.backend.Repositories.PessoaRepository;
+import com.gamerdream.backend.Repositories.Usuario.EnderecoRepository;
+import com.gamerdream.backend.Repositories.Usuario.PessoaRepository;
 
 @Service
 public class PessoaServices {

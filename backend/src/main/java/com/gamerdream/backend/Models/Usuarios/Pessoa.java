@@ -1,13 +1,18 @@
 package com.gamerdream.backend.Models.Usuarios;
 
+import java.util.Set;
+
 import com.gamerdream.backend.Models.Endereco;
+import com.gamerdream.backend.Models.Produtos.Produto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -30,6 +35,9 @@ public class Pessoa {
 
     @Column(name = "num_celular", columnDefinition = "CHAR(11)", nullable = true)
     private String numCelular;
+
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER)
+    private Set<Produto> produtos;
 
     @OneToOne
     @JoinColumn(name = "endereco", referencedColumnName = "idEndereco")

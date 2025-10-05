@@ -1,4 +1,4 @@
-package com.gamerdream.backend.Repositories;
+package com.gamerdream.backend.Repositories.Usuario;
 
 import java.util.Optional;
 

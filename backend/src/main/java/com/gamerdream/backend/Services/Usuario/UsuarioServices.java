@@ -1,4 +1,4 @@
-package com.gamerdream.backend.Services;
+package com.gamerdream.backend.Services.Usuario;
 
 import java.util.Date;
 import java.util.Optional;
@@ -11,7 +11,7 @@ import com.gamerdream.backend.DTOs.ReqCadastroDTO;
 import com.gamerdream.backend.Models.Usuarios.Empresa;
 import com.gamerdream.backend.Models.Usuarios.Pessoa;
 import com.gamerdream.backend.Models.Usuarios.Usuario;
-import com.gamerdream.backend.Repositories.UsuarioRepository;
+import com.gamerdream.backend.Repositories.Usuario.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
 

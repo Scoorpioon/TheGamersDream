@@ -1,4 +1,4 @@
-package com.gamerdream.backend.Repositories;
+package com.gamerdream.backend.Repositories.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.gamerdream.backend.Services;
+package com.gamerdream.backend.Services.Usuario;
 
 import org.springframework.stereotype.Service;
 

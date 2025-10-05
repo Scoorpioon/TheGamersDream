@@ -19,8 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gamerdream.backend.DTOs.ReqCadastroDTO;
 import com.gamerdream.backend.Models.Usuarios.Usuario;
-import com.gamerdream.backend.Repositories.UsuarioRepository;
-import com.gamerdream.backend.Services.UsuarioServices;
+import com.gamerdream.backend.Repositories.Usuario.UsuarioRepository;
+import com.gamerdream.backend.Services.Usuario.UsuarioServices;
 
 @RestController
 @RequestMapping("/usuario")

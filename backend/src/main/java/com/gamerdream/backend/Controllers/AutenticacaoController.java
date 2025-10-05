@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.gamerdream.backend.Services.ListaNegraTokenService;
-import com.gamerdream.backend.Services.UsuarioServices;
+import com.gamerdream.backend.Services.Usuario.UsuarioServices;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
