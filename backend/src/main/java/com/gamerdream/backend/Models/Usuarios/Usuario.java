@@ -3,20 +3,17 @@ package com.gamerdream.backend.Models.Usuarios;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gamerdream.backend.DTOs.ReqLoginDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -70,18 +67,24 @@ public class Usuario implements UserDetails {
     private Date dataEdicao; // TODA VEZ QUE UM USUÁRIO MUDAR QUALQUER DADO DA CONTA, POR MENOR QUE SEJA, A DATA SERÁ SALVA!
 
     /* Spring Security */
-    
-/*     @Enumerated(EnumType.STRING)
-    private Role role; */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @JsonIgnore
     @Override
     public String getPassword() {
         return "secreto!";
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -128,28 +131,12 @@ public class Usuario implements UserDetails {
         this.idUsuario = id;
     }
 
-    public String getNome() {
-        return username;
-    }
-
-    public void setNome(String username) {
-        this.username = username;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return password;
-    }
-
-    public void setSenha(String password) {
-        this.password = password;
     }
 
     public String getTelefone() {
@@ -178,14 +165,6 @@ public class Usuario implements UserDetails {
 
        public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setEmpresa(Empresa empresa) {

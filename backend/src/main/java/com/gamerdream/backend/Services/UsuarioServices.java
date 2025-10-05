@@ -44,8 +44,8 @@ public class UsuarioServices {
         Date momentoAtual = new Date();
 
         novoUsuario.setId(null);
-        novoUsuario.setNome(requisicaoDoCadastro.informacoesDeLogin().username());
-        novoUsuario.setSenha(passwordEncoder.encode(requisicaoDoCadastro.informacoesDeLogin().password()));
+        novoUsuario.setUsername(requisicaoDoCadastro.informacoesDeLogin().username());
+        novoUsuario.setPassword(passwordEncoder.encode(requisicaoDoCadastro.informacoesDeLogin().password()));
         novoUsuario.setEmail(requisicaoDoCadastro.informacoesDeLogin().email());
         novoUsuario.setTelefone(requisicaoDoCadastro.informacoesDeLogin().celular());
         novoUsuario.setDataCriacao(momentoAtual);
