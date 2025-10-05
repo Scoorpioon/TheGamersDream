@@ -83,13 +83,13 @@ public class Pessoa {
         this.numCelular = numCelular;
     }
 
-    /* public Endereco getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    } */
+    }
 
     // @Column(name = "tags_preferencias_compra")
     

@@ -6,6 +6,7 @@ public record PessoaFisicaDTO(
     String emailPessoal,
     String dataNascimento,
     String numCelular,
-    PessoaJuridicaDTO empresa
+    PessoaJuridicaDTO empresa,
+    EnderecoDTO endereco
 
 ) {}
