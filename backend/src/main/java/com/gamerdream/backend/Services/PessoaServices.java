@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.gamerdream.backend.Repositories.UsuarioRepository;
 
 @Service
-public class ConsumidorServices {
+public class PessoaServices {
     
     @Autowired
     private UsuarioRepository repositorioUsuario;

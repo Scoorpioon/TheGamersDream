@@ -7,8 +7,9 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.gamerdream.backend.Models.Usuarios.InfosAdicionais.Preferencias;
+import com.gamerdream.backend.DTOs.ReqLoginDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,8 +20,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -61,16 +60,6 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "id_pessoa", referencedColumnName = "idPessoa")
     private Pessoa pessoa;
 
-    @ManyToMany
-    @JoinTable(
-        name = "preferencias_usuario",
-        joinColumns = @JoinColumn(name = "usuario_id"),
-        inverseJoinColumns = @JoinColumn(name = "preferencia_id")
-    )
-    private List<Preferencias> preferenciasUsuario;
-
-    // Tabela de preferências (Configurações) |
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_criacao", nullable=false)
     private Date dataCriacao = new Date();
@@ -90,23 +79,21 @@ public class Usuario implements UserDetails {
 
     /* =============================================================== */
 
-    public Usuario(String username, String email, String password, String telefone, Empresa empresa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+    public Usuario(String username, String email, String password, String telefone, Empresa empresa, Date dataCriacao) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.telefone = telefone;
         this.empresa = empresa;
-        this.preferenciasUsuario = preferenciasUsuario;
         this.dataCriacao = dataCriacao;
     }
 
-    public Usuario(String username, String email, String password, String telefone, Pessoa pessoa, List<Preferencias> preferenciasUsuario, Date dataCriacao) {
+    public Usuario(String username, String email, String password, String telefone, Pessoa pessoa, Date dataCriacao) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.telefone = telefone;
         this.pessoa = pessoa;
-        this.preferenciasUsuario = preferenciasUsuario;
         this.dataCriacao = dataCriacao;
     }
 
@@ -173,7 +160,7 @@ public class Usuario implements UserDetails {
     public void setDataEdicao(Date dataEdicao) {
         this.dataEdicao = dataEdicao;
     }
-
+    
     @Override
     public String getPassword() {
         throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
@@ -182,5 +169,9 @@ public class Usuario implements UserDetails {
     @Override
     public String getUsername() {
         throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+    }
+
+    public boolean loginCorreto(ReqLoginDTO requestLogin, PasswordEncoder passEncoder) {
+        return passEncoder.matches(requestLogin.password(), this.password);
     }
 }
