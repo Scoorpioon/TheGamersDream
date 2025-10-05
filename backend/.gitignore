@@ -6,6 +6,9 @@ target/
 
 ### Springboot ###
 /src/main/resources/application.properties
+/src/main/resources/app_pkcs8.key
+/src/main/resources/app.key
+/src/main/resources/app.pub
 
 ### STS ###
 .apt_generated
