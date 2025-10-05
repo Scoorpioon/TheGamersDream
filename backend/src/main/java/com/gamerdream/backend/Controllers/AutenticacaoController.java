@@ -5,15 +5,8 @@ import java.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import com.gamerdream.backend.Services.TokenService;
 import com.gamerdream.backend.Services.UsuarioServices;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -25,7 +18,6 @@ import com.gamerdream.backend.DTOs.ReqLoginDTO;
 import com.gamerdream.backend.DTOs.ResLoginDTO;
 import com.gamerdream.backend.Exceptions.CredenciaisInvalidasEx;
 import com.gamerdream.backend.Exceptions.UsuarioNaoEncontradoEx;
-import com.gamerdream.backend.Repositories.UsuarioRepository;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,10 +51,10 @@ public class AutenticacaoController {
         }
 
         var agora = Instant.now();
-        var expiraEm = 300L;
+        Long expiraEm = 1620L; // se parar de funcionar, muda pra var
 
         var claims = JwtClaimsSet.builder()
-                     .issuer("gamersbackend")
+                     .issuer("gamerbackend")
                      .subject(String.valueOf(usuario.get().getIdUsuario()))
                      .issuedAt(agora)
                      .expiresAt(agora.plusSeconds(expiraEm)).build();

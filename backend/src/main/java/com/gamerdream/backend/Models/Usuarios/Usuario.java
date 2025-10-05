@@ -62,7 +62,7 @@ public class Usuario implements UserDetails {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_criacao", nullable=false)
-    private Date dataCriacao = new Date();
+    private Date dataCriacao;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_edicao")
