@@ -1,10 +1,13 @@
 package com.gamerdream.backend.Controllers;
 
 import java.net.URI;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gamerdream.backend.DTOs.ReqCadastroDTO;
 import com.gamerdream.backend.Models.Usuarios.Usuario;
+import com.gamerdream.backend.Repositories.UsuarioRepository;
 import com.gamerdream.backend.Services.UsuarioServices;
 
 @RestController
@@ -25,6 +29,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioServices servicoUsuario;
+
+    @Autowired UsuarioRepository repoUsuario;
 
     @PostMapping("/cadastro")
     @Validated
@@ -46,5 +52,13 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Houve uma violação de integridade de dados");
 
         }
+    }
+
+    @GetMapping("/minha-conta")
+    private ResponseEntity<?> dadosUsuarioLogado(@AuthenticationPrincipal Jwt token) {
+        String id = token.getSubject();
+        Optional<Usuario> usuario = repoUsuario.findById(Long.parseLong(id));
+
+        return ResponseEntity.ok(usuario);
     }
 }

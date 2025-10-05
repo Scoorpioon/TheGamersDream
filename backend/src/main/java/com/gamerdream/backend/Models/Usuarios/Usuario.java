@@ -1,6 +1,7 @@
 package com.gamerdream.backend.Models.Usuarios;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -70,22 +71,22 @@ public class Usuario implements UserDetails {
 
     /* Spring Security */
     
-    @Enumerated(EnumType.STRING)
-    private Role role;
+/*     @Enumerated(EnumType.STRING)
+    private Role role; */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return Collections.emptyList();
     }
 
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+        return "secreto!";
     }
 
     @Override
     public String getUsername() {
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+        return this.username;
     }
 
     public boolean loginCorreto(ReqLoginDTO requestLogin, PasswordEncoder passEncoder) {

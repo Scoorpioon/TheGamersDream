@@ -33,9 +33,9 @@ public class Empresa {
     @Column(name = "plano", nullable = false)
     private int plano;
 
-    @OneToOne
+/*     @OneToOne
     @JoinColumn(name = "endereco", referencedColumnName = "idEndereco")
-    private Endereco endereco;
+    private Endereco endereco; */
 
     public Long getIdEmpresa() {
         return idEmpresa;
