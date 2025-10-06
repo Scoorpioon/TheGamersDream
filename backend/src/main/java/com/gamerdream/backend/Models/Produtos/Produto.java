@@ -2,11 +2,14 @@ package com.gamerdream.backend.Models.Produtos;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import com.gamerdream.backend.Models.Usuarios.Empresa;
 import com.gamerdream.backend.Models.Usuarios.Pessoa;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -36,8 +39,10 @@ public class Produto {
     @Column(name = "valor_produto", nullable = true)
     private BigDecimal preco;
 
-    @Column(name = "detalhes_tecnicos_produto", length = 3000, nullable = true)
-    private String detalhesTecnicos;
+    @ElementCollection
+    @CollectionTable(name = "detalhes_tecnicos_produto", joinColumns = @JoinColumn(name = "id_produto"))
+    @Column(name = "detalhes_tecnicos", length = 220, nullable = true)
+    private List<String> detalhesTecnicos;
 
     @Column(name = "data_publicacao_produto")
     private Date dataPublicacao;
@@ -88,11 +93,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public String getDetalhesTecnicos() {
+    public List<String> getDetalhesTecnicos() {
         return detalhesTecnicos;
     }
 
-    public void setDetalhesTecnicos(String detalhesTecnicos) {
+    public void setDetalhesTecnicos(List<String> detalhesTecnicos) {
         this.detalhesTecnicos = detalhesTecnicos;
     }
 

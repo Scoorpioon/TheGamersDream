@@ -19,4 +19,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleCredenciaisInvalidas(CredenciaisInvalidasEx exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", exception.getMessage(), "code",HttpStatus.UNAUTHORIZED));
     }
+
+    @ExceptionHandler(BancoDeDadosEx.class)
+    public ResponseEntity<?> handleBancoDeDados(BancoDeDadosEx exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", exception.getMessage(), "code",HttpStatus.UNAUTHORIZED));
+    }
 }

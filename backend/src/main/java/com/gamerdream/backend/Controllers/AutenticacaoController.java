@@ -57,7 +57,7 @@ public class AutenticacaoController {
         }
 
         var agora = Instant.now();
-        Long expiraEm = 1620L; // se parar de funcionar, muda pra var
+        Long expiraEm = 1620L; 
 
         var claims = JwtClaimsSet.builder()
                      .issuer("gamerbackend")
