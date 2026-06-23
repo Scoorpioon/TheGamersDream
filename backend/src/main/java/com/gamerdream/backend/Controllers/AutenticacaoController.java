@@ -46,7 +46,7 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResLoginDTO> logar(@RequestBody ReqLoginDTO dados) {
+    public ResponseEntity<ResLoginDTO> login(@RequestBody ReqLoginDTO dados) {
 
         var usuario = servUsuario.procurarUsername(dados.username());
 
@@ -71,7 +71,7 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> desconectar(@RequestHeader("Authorization") String header) {
+    public ResponseEntity<Void> logout(@RequestHeader("Authorization") String header) {
         String token = header.replace("Bearer", "");
 
         if(this.listaNegra.taNaListaNegra(token)) {

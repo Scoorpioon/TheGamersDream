@@ -40,7 +40,6 @@ public class UsuarioServices {
     @Transactional
     public Usuario criarUsuario(ReqCadastroDTO requisicaoDoCadastro) {
         Usuario novoUsuario = new Usuario();
-        
         Date momentoAtual = new Date();
 
         novoUsuario.setId(null);

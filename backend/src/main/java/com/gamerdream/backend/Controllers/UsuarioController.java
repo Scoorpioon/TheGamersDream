@@ -23,7 +23,7 @@ import com.gamerdream.backend.Repositories.Usuario.UsuarioRepository;
 import com.gamerdream.backend.Services.Usuario.UsuarioServices;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/user")
 @Validated
 public class UsuarioController {
 
@@ -34,7 +34,7 @@ public class UsuarioController {
 
     @PostMapping("/cadastro")
     @Validated
-    private ResponseEntity<?> cadastrarUsuario(@RequestBody ReqCadastroDTO dadosDoCadastro) {
+    private ResponseEntity<?> signUpUser(@RequestBody ReqCadastroDTO dadosDoCadastro) {
         try {
             Usuario usuarioCadastrado = this.servicoUsuario.criarUsuario(dadosDoCadastro);
 
@@ -54,8 +54,8 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/minha-conta")
-    private ResponseEntity<?> dadosUsuarioLogado(@AuthenticationPrincipal Jwt token) {
+    @GetMapping("/my-account")
+    private ResponseEntity<?> loggedUserData(@AuthenticationPrincipal Jwt token) {
         String id = token.getSubject();
         Optional<Usuario> usuario = repoUsuario.findById(Long.parseLong(id));
 
