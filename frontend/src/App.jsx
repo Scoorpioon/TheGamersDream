@@ -1,7 +1,11 @@
+import MainPage from "./Components/main/MainPage";
+import Header from "./Components/main/Header";
+
 const App = () => {
   return(
     <>
-      <p>Oi :)</p>
+      <Header></Header>
+      <MainPage />
     </>
   )
 }
